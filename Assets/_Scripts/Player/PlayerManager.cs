@@ -10,16 +10,13 @@ public class PlayerManager : MonoBehaviour {
 
     float power = 10f;         //power of rb's addforce
 
+
+
     private void Awake()
     {
         rb = transform.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
-        
-    }
 
-    private void Update()
-    {
-        Debug.Log(rb.velocity.y);
     }
 
     //after click, 'player' bounces on random directions
@@ -32,30 +29,15 @@ public class PlayerManager : MonoBehaviour {
             started = true;
         }
 
-        //stops velocity.y so 'player' stops falling down after click
-        //rb.velocity = new Vector2(0, 0);
-        rb.AddForce(new Vector2(Random.Range(-75f, 100f), Random.Range(75f, 75f) * Time.deltaTime * power));
+        rb.AddForce(new Vector2(Random.Range(-75f, 100f), Random.Range(60f, 75f) * Time.deltaTime * power));
 
         //adds .y velocity so 'player' bounces up after click
         rb.velocity = new Vector2(0, 1.5f);
+        
+        // adds a torque so ball doesn't seems so static
+        rb.AddTorque(0.35f);
     }
 
 
-
-    //'player' bouncing off of borders
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Border")
-        {
-            if (collision.transform.position.x > transform.position.x)
-            {
-                rb.AddForce(new Vector2(-3, 0), ForceMode2D.Impulse);
-            }
-            else if (collision.transform.position.x < transform.position.x)
-            {
-                rb.AddForce(new Vector2(3, 0), ForceMode2D.Impulse);
-            }
-        }
-    }
 
 }
