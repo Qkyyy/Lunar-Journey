@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class GameStateHandler : MonoBehaviour {
 
-    ObstaclesGenerator obGen;
 
     Transform playerTransform;
+    ObstaclesGenerator obGen;
+
 
     private void Awake()
     {
-        obGen = new ObstaclesGenerator();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        obGen = new ObstaclesGenerator();
     }
     private void Start()
     {

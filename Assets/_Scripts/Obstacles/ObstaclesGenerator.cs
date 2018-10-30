@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaclesGenerator : MonoBehaviour {
+public class ObstaclesGenerator : MonoBehaviour{
 
     public void SpawnObstacle_Normal()
     {
