@@ -51,11 +51,9 @@ public class ObstacleManager : MonoBehaviour {
         {
             //if its 'killer' type, teleport ball outside of camera view to its game over
             case "obstacle_killer":
-                collision.transform.SetPositionAndRotation(new Vector2(leftBorder.position.x - 5f, collision.transform.position.y), Quaternion.Euler(0, 0, 0));
+                if(collision.gameObject.tag == "Player")
+                    collision.transform.SetPositionAndRotation(new Vector2(leftBorder.position.x - 5f, collision.transform.position.y), Quaternion.Euler(0, 0, 0));
             break;
-            default:
-                Debug.Log("kolizja");
-                break;
         }
     }
 

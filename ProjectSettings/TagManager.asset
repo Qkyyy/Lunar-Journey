@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Border
   - obstacle_killer
+  - obstacle_metal
+  - ufo
   layers:
   - Default
   - TransparentFX

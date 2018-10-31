@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour {
     //after click, 'player' bounces on random directions
     private void OnMouseDown()
     {
+        Time.timeScale = 1;
         //unblocks player after first click 
         if (started == false)
         {
@@ -29,7 +30,7 @@ public class PlayerManager : MonoBehaviour {
             started = true;
         }
 
-        rb.AddForce(new Vector2(Random.Range(-75f, 100f), Random.Range(60f, 75f) * Time.deltaTime * power));
+        rb.AddForce(new Vector2(Random.Range(-50f, 50f), Random.Range(60f, 75f) * Time.deltaTime * power));
 
         //adds .y velocity so 'player' bounces up after click
         rb.velocity = new Vector2(0, 1.5f);
