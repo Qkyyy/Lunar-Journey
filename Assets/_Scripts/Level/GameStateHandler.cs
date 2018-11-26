@@ -1,30 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateHandler : MonoBehaviour {
 
 
     Transform playerTransform;
     ObstaclesGenerator obGen;
+    Text scoreText;
+
+    bool calculateScore = true;
+
+    float score = 0f;
 
 
     private void Awake()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         obGen = new ObstaclesGenerator();
-        //Time.timeScale = 0;
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
+        Time.timeScale = 0;
     }
     private void Start()
     {
-        InvokeRepeating("SpawnObstacle_Normal", 5f, 5f);
-        InvokeRepeating("SpawnObstacle_Killer", 15f, 15f);
+        InvokeRepeating("SpawnObstacle_Normal", 2.5f, 2.5f);
+        InvokeRepeating("SpawnObstacle_Killer", 10f, 10f);
+        InvokeRepeating("SpawnUfo", 60f, 60f);
 
     }
 
     private void Update()
     {
         StartCoroutine(HandleGameOver());
+        CalculateScore();
     }
 
 
@@ -34,6 +43,7 @@ public class GameStateHandler : MonoBehaviour {
         if (playerTransform.GetComponent<SpriteRenderer>().isVisible == false || playerTransform.GetComponent<SpriteRenderer>().material.color.a <= 0)
         {
             Debug.Log("game over");
+            calculateScore = false;
         }
     }
 
@@ -46,4 +56,19 @@ public class GameStateHandler : MonoBehaviour {
     {
         obGen.SpawnObstacle_Killer();
     }
+
+    void SpawnUfo()
+    {
+        obGen.SpawnUfo();
+    }
+
+    void CalculateScore()
+    {
+        if (calculateScore == true)
+        {
+            score += Time.deltaTime;
+            scoreText.text = Mathf.Round(score).ToString();
+        }
+    }
+
 }

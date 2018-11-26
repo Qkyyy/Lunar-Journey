@@ -14,4 +14,9 @@ public class ObstaclesGenerator : MonoBehaviour{
         Instantiate(Resources.Load("Prefabs/Obstacle_killer"), new Vector2(0, 20), Quaternion.Euler(0, 0, 0));
     }
 
+    public void SpawnUfo()
+    {
+        Instantiate(Resources.Load("Prefabs/Ufo"), new Vector2(0, 20), Quaternion.Euler(0, 0, 0));
+    }
+
 }

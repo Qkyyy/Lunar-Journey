@@ -10,6 +10,8 @@ public class UfoManager : MonoBehaviour {
     Transform ufoBeam;
     Transform playerTransform;
 
+    Animator beamAnimator;
+
     float finishPoint;          //point where ufo stops
     float playerAlpha = 1f;     //Alpha of player sprite
     float beamAlpha = 0f;
@@ -22,12 +24,14 @@ public class UfoManager : MonoBehaviour {
 
     private void Awake()
     {
+        //beamAnimator.ResetTrigger("Beam");
         //gameobjects Transforms
         leftBorder = GameObject.Find("LeftBorder").GetComponent<Transform>();
         topBorder = GameObject.Find("TopBorder").GetComponent<Transform>();
         rightBorder = GameObject.Find("RightBorder").GetComponent<Transform>();
         ufoBeam = transform.GetChild(0).GetComponent<Transform>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        beamAnimator = ufoBeam.GetComponent<Animator>();
 
 
         //sets finish point where ufo stops
@@ -45,7 +49,6 @@ public class UfoManager : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.a);
         HandleBeamRetraction();
         HandleUfoMovement();
         HandlePlayerCatching();
@@ -66,12 +69,17 @@ public class UfoManager : MonoBehaviour {
     }
 
 
-    //if player is up in ufo object, 'player' alpha slowly changes to 0
+    //if player is up in ufo object, 'player' alpha slowly changes to 0, after that UFO turns off beam and flies away
     void HandlePlayerCatching()
     {
         if (playerInUfo == true)
         {
             playerTransform.GetComponent<SpriteRenderer>().material.color = new Color(playerTransform.GetComponent<SpriteRenderer>().material.color.r, playerTransform.GetComponent<SpriteRenderer>().material.color.g, playerTransform.GetComponent<SpriteRenderer>().material.color.b, playerAlpha -= 0.2f * Time.deltaTime * 2f);
+            if (playerTransform.GetComponent<SpriteRenderer>().material.color.a <= 0)
+            {
+                ufoBeam.gameObject.SetActive(false);
+                transform.Translate(Vector3.right * Time.deltaTime * 3f);
+            }
         }
     }
 
@@ -81,6 +89,7 @@ public class UfoManager : MonoBehaviour {
         if (beamCaughtPlayer == true && pullPlayer == true)
         {
             playerTransform.rotation = Quaternion.Euler(0, 0, 0);
+            playerTransform.position = new Vector2(ufoBeam.transform.position.x, playerTransform.position.y);
             playerTransform.GetComponent<Rigidbody2D>().AddTorque(0);
             playerTransform.Translate(Vector3.up * Time.deltaTime);
 
@@ -104,6 +113,9 @@ public class UfoManager : MonoBehaviour {
             move = false;
             ufoBeam.gameObject.SetActive(true);
             transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha += 0.2f * Time.deltaTime * 2f);
+            //transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha = 255);
+
+            beamAnimator.SetTrigger("Beam");
         }
     }
 
@@ -116,7 +128,8 @@ public class UfoManager : MonoBehaviour {
             if (beamCaughtPlayer == false)
             {
                 ufoBeam.gameObject.SetActive(false);
-                transform.Translate(Vector3.right * Time.deltaTime);
+                transform.Translate(Vector3.right * Time.deltaTime * 3f);
+                
             }
         }
     }
