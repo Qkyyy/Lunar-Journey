@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1433992849806410
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114444653751850446}
   - component: {fileID: 70183876799976326}
   - component: {fileID: 50751074921219346}
+  - component: {fileID: 95027916193139788}
   m_Layer: 0
   m_Name: Ufo
   m_TagString: ufo
@@ -69,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433992849806410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0231233, y: 2.7584307, z: -10}
+  m_LocalPosition: {x: -5.735533, y: 6.8049707, z: -10}
   m_LocalScale: {x: 0.3025, y: 0.3025, z: 0.3025}
   m_Children:
   - {fileID: 4126378917628834}
@@ -140,6 +141,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0050413585, y: -0.025216106}
   m_Size: {x: 4.6909375, y: 1.9680457}
   m_Direction: 1
+--- !u!95 &95027916193139788
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1433992849806410}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 716bba26e9e8e6144b646861a568d375, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95716280800239602
 Animator:
   serializedVersion: 3
@@ -214,7 +233,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7fca827e71fa8e34599b17903c7959d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

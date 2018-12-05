@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameStateHandler : MonoBehaviour {
 
+    public GameObject pauseInterface;
 
     Transform playerTransform;
     ObstaclesGenerator obGen;
@@ -27,7 +28,6 @@ public class GameStateHandler : MonoBehaviour {
         InvokeRepeating("SpawnObstacle_Normal", 2.5f, 2.5f);
         InvokeRepeating("SpawnObstacle_Killer", 10f, 10f);
         InvokeRepeating("SpawnUfo", 60f, 60f);
-
     }
 
     private void Update()
@@ -42,8 +42,10 @@ public class GameStateHandler : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         if (playerTransform.GetComponent<SpriteRenderer>().isVisible == false || playerTransform.GetComponent<SpriteRenderer>().material.color.a <= 0)
         {
-            Debug.Log("game over");
+            pauseInterface.SetActive(true);
             calculateScore = false;
+            CheckIfHighscore();
+            Time.timeScale = 0;
         }
     }
 
@@ -69,6 +71,13 @@ public class GameStateHandler : MonoBehaviour {
             score += Time.deltaTime;
             scoreText.text = Mathf.Round(score).ToString();
         }
+    }
+
+    void CheckIfHighscore()
+    {
+        if (score > PlayerPrefs.GetInt("highscore"))
+            PlayerPrefs.SetInt("highscore", (int)score);
+
     }
 
 }

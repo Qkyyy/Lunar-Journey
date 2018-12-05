@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
+
     //after click, 'player' bounces on random directions
     private void OnMouseDown()
     {

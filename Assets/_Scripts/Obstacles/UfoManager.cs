@@ -11,6 +11,7 @@ public class UfoManager : MonoBehaviour {
     Transform playerTransform;
 
     Animator beamAnimator;
+    Animator ufoAnimator;
 
     float finishPoint;          //point where ufo stops
     float playerAlpha = 1f;     //Alpha of player sprite
@@ -21,10 +22,10 @@ public class UfoManager : MonoBehaviour {
     bool beamCaughtPlayer = false;      //tells if player get caught in the beam
     bool playerInUfo = false;           //tells if player is up in ufo object
     bool pullPlayer = false;            //tells if player should still be pulled in beam
+    bool ufoInRetreat = false;          //tells if ufo is retreating
 
     private void Awake()
     {
-        //beamAnimator.ResetTrigger("Beam");
         //gameobjects Transforms
         leftBorder = GameObject.Find("LeftBorder").GetComponent<Transform>();
         topBorder = GameObject.Find("TopBorder").GetComponent<Transform>();
@@ -32,6 +33,7 @@ public class UfoManager : MonoBehaviour {
         ufoBeam = transform.GetChild(0).GetComponent<Transform>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         beamAnimator = ufoBeam.GetComponent<Animator>();
+        ufoAnimator = transform.GetComponent<Animator>();
 
 
         //sets finish point where ufo stops
@@ -46,8 +48,12 @@ public class UfoManager : MonoBehaviour {
         transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha);
 
     }
+    private void Start()
+    {
+        ufoAnimator.Play("ufoMove");
+    }
 
-    private void Update()
+    private void FixedUpdate()
     {
         HandleBeamRetraction();
         HandleUfoMovement();
@@ -77,6 +83,7 @@ public class UfoManager : MonoBehaviour {
             playerTransform.GetComponent<SpriteRenderer>().material.color = new Color(playerTransform.GetComponent<SpriteRenderer>().material.color.r, playerTransform.GetComponent<SpriteRenderer>().material.color.g, playerTransform.GetComponent<SpriteRenderer>().material.color.b, playerAlpha -= 0.2f * Time.deltaTime * 2f);
             if (playerTransform.GetComponent<SpriteRenderer>().material.color.a <= 0)
             {
+                beamAnimator.Play("beamClose");
                 ufoBeam.gameObject.SetActive(false);
                 transform.Translate(Vector3.right * Time.deltaTime * 3f);
             }
@@ -111,11 +118,11 @@ public class UfoManager : MonoBehaviour {
         if (transform.position.x >= finishPoint)
         {
             move = false;
-            ufoBeam.gameObject.SetActive(true);
+            if (ufoInRetreat == false)
+                ufoBeam.gameObject.SetActive(true);
             transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha += 0.2f * Time.deltaTime * 2f);
-            //transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha = 255);
 
-            beamAnimator.SetTrigger("Beam");
+            beamAnimator.Play("beamOpen");
         }
     }
 
@@ -127,6 +134,9 @@ public class UfoManager : MonoBehaviour {
             yield return new WaitForSeconds(5f);
             if (beamCaughtPlayer == false)
             {
+                ufoInRetreat = true;
+                beamAnimator.Play("beamClose");
+                yield return new WaitForSeconds(0.420f);
                 ufoBeam.gameObject.SetActive(false);
                 transform.Translate(Vector3.right * Time.deltaTime * 3f);
                 
@@ -141,4 +151,5 @@ public class UfoManager : MonoBehaviour {
             Destroy(transform.gameObject);
         }
     }
+
 }
