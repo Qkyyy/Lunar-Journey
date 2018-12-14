@@ -37,12 +37,13 @@ public class UfoManager : MonoBehaviour {
 
 
         //sets finish point where ufo stops
-        finishPoint = Random.Range(leftBorder.position.x + 2.5f, rightBorder.position.x - 2.5f);
+        finishPoint = Random.Range(leftBorder.position.x+0.2f, rightBorder.position.x - 0.2f);
+        Debug.Log("ufo finish point " + finishPoint);
         //ignore collision with left border
         Physics2D.IgnoreCollision(transform.GetComponent<Collider2D>(), leftBorder.GetComponent<Collider2D>());
 
         //at Awake teleport ufo away from the screen
-        transform.SetPositionAndRotation(new Vector2(leftBorder.position.x - 3f, topBorder.position.y), Quaternion.Euler(0, 0, 0));
+        transform.SetPositionAndRotation(new Vector2(leftBorder.position.x - 3f, topBorder.position.y-0.7f), Quaternion.Euler(0, 0, 0));
 
 
         transform.GetChild(0).GetComponent<SpriteRenderer>().material.color = new Color(transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.r, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.g, transform.GetChild(0).GetComponent<SpriteRenderer>().material.color.b, beamAlpha);

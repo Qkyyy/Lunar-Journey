@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameStateHandler : MonoBehaviour {
 
     public GameObject pauseInterface;
+    public Image highscoreImage;
+
 
     Transform playerTransform;
     ObstaclesGenerator obGen;
@@ -27,7 +29,7 @@ public class GameStateHandler : MonoBehaviour {
     {
         InvokeRepeating("SpawnObstacle_Normal", 2.5f, 2.5f);
         InvokeRepeating("SpawnObstacle_Killer", 10f, 10f);
-        InvokeRepeating("SpawnUfo", 60f, 60f);
+        InvokeRepeating("SpawnUfo", 2f, 60f);
     }
 
     private void Update()
@@ -44,7 +46,7 @@ public class GameStateHandler : MonoBehaviour {
         {
             pauseInterface.SetActive(true);
             calculateScore = false;
-            CheckIfHighscore();
+            UpdateHighscore();
             Time.timeScale = 0;
         }
     }
@@ -70,14 +72,30 @@ public class GameStateHandler : MonoBehaviour {
         {
             score += Time.deltaTime;
             scoreText.text = Mathf.Round(score).ToString();
+            if (CheckIfHighScore() == true)
+            {
+                Debug.Log("showing trophy");
+                highscoreImage.gameObject.SetActive(true);
+            }
+            else
+                highscoreImage.gameObject.SetActive(false);
         }
     }
 
-    void CheckIfHighscore()
+    void UpdateHighscore()
+    {
+        if (CheckIfHighScore() == true)
+        { 
+            PlayerPrefs.SetInt("highscore", (int)score);
+        }
+    }
+
+    bool CheckIfHighScore()
     {
         if (score > PlayerPrefs.GetInt("highscore"))
-            PlayerPrefs.SetInt("highscore", (int)score);
-
+            return true;
+        else
+            return false;
     }
 
 }

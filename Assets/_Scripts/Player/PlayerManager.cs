@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour {
 
     Rigidbody2D rb;             //player's rigidbody2d
 
-    float power = 10f;         //power of rb's addforce
+    float power = 15f;         //power of rb's addforce
 
 
 
@@ -16,26 +16,28 @@ public class PlayerManager : MonoBehaviour {
     {
         rb = transform.GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
-
     }
 
 
     //after click, 'player' bounces on random directions
     private void OnMouseDown()
     {
-        Time.timeScale = 1;
+        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 dir = transform.position - clickPosition;
         //unblocks player after first click 
         if (started == false)
         {
+            Time.timeScale = 1;
             rb.bodyType = RigidbodyType2D.Dynamic;
             started = true;
         }
 
-        rb.AddForce(new Vector2(Random.Range(-50f, 50f), Random.Range(60f, 75f) * Time.deltaTime * power));
+        rb.velocity = Vector2.zero;
+        rb.AddForce(dir.normalized * power,ForceMode2D.Impulse);
 
         //adds .y velocity so 'player' bounces up after click
-        rb.velocity = new Vector2(0, 1.5f);
-        
+        rb.velocity = new Vector2(rb.velocity.x, 2.5f);
+
         // adds a torque so ball doesn't seems so static
         rb.AddTorque(0.35f);
     }

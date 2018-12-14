@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212566220489757374}
   - component: {fileID: 95716280800239602}
   - component: {fileID: 114999291498198888}
-  - component: {fileID: 68071495411472206}
+  - component: {fileID: 68883203245997512}
   m_Layer: 0
   m_Name: UfoBeam
   m_TagString: Untagged
@@ -57,8 +57,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332327981011866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.51, z: 0}
-  m_LocalScale: {x: 3.305785, y: 9.917355, z: 3.305785}
+  m_LocalPosition: {x: 0, y: -9.61, z: 0}
+  m_LocalScale: {x: 2.1900826, y: 7.438016, z: 3.305785}
   m_Children: []
   m_Father: {fileID: 4601900403989590}
   m_RootOrder: 0
@@ -70,8 +70,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433992849806410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.735533, y: 6.8049707, z: -10}
-  m_LocalScale: {x: 0.3025, y: 0.3025, z: 0.3025}
+  m_LocalPosition: {x: -2.5139806, y: 3.9787834, z: -10}
+  m_LocalScale: {x: 0.427251, y: 0.427251, z: 0.427251}
   m_Children:
   - {fileID: 4126378917628834}
   m_Father: {fileID: 0}
@@ -97,13 +97,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &68071495411472206
+--- !u!68 &68883203245997512
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332327981011866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -112,20 +112,19 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.7335311, y: 0.108705126}
-  - {x: -0.4346975, y: 1.2071285}
-  - {x: 0.44260347, y: 1.2079138}
-  - {x: 0.9793689, y: -0.95891607}
-  - {x: 0.6758084, y: -1.1354879}
-  - {x: 0.29390946, y: -1.2041938}
-  - {x: -0.21911934, y: -1.2074572}
-  - {x: -0.61334246, y: -1.1512892}
-  - {x: -0.9054033, y: -1.0519974}
-  - {x: -0.963362, y: -0.9865554}
-  - {x: -0.7442709, y: -0.028837208}
-  - {x: -0.7302372, y: 0.0123928515}
-  - {x: -0.73264664, y: 0.07131925}
-  - {x: -0.74215573, y: 0.1077714}
+  - {x: 0.46767652, y: 1.1685286}
+  - {x: 0.78964925, y: -0.22058038}
+  - {x: 0.87917817, y: -0.5727246}
+  - {x: 0.9293031, y: -0.77654094}
+  - {x: 0.96511245, y: -0.96602917}
+  - {x: 0.85683054, y: -1.0609661}
+  - {x: 0.57714313, y: -1.1597965}
+  - {x: 0.2243768, y: -1.2084237}
+  - {x: -0.25866964, y: -1.2062528}
+  - {x: -0.48555553, y: -1.1725603}
+  - {x: -0.76797724, y: -1.1066936}
+  - {x: -0.9686972, y: -0.96422464}
+  - {x: -0.46855295, y: 1.1690553}
 --- !u!70 &70183876799976326
 CapsuleCollider2D:
   m_ObjectHideFlags: 1

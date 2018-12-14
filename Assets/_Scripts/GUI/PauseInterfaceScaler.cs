@@ -22,11 +22,11 @@ public class PauseInterfaceScaler : MonoBehaviour {
 
         //places the playButton above the center of background
         playButton.anchoredPosition = new Vector2(background.anchoredPosition.x, background.anchoredPosition.y + (background.sizeDelta.y / 6));
-        playButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, background.sizeDelta.x);
+        playButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, background.sizeDelta.x/1.5f);
         playButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, background.sizeDelta.y / 5);
 
         exitButton.anchoredPosition = new Vector2(background.anchoredPosition.x, background.anchoredPosition.y - (background.sizeDelta.y / 6));
-        exitButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, background.sizeDelta.x);
+        exitButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, background.sizeDelta.x/1.5f);
         exitButton.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, background.sizeDelta.y / 5);
 
 
