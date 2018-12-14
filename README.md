@@ -1,2 +1,2 @@
-# unnamed-mobile-game
+# Lunar Jurney
 2d mobile game
