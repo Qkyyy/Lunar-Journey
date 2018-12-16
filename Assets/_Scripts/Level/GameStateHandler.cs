@@ -8,6 +8,9 @@ public class GameStateHandler : MonoBehaviour {
     public GameObject pauseInterface;
     public Image highscoreImage;
 
+    public delegate void SpawnedObstacle();
+    public static event SpawnedObstacle NormalObstacleSpawned;
+    public static event SpawnedObstacle UfoSpawned;
 
     Transform playerTransform;
     ObstaclesGenerator obGen;
@@ -29,7 +32,7 @@ public class GameStateHandler : MonoBehaviour {
     {
         InvokeRepeating("SpawnObstacle_Normal", 2.5f, 2.5f);
         InvokeRepeating("SpawnObstacle_Killer", 10f, 10f);
-        InvokeRepeating("SpawnUfo", 2f, 60f);
+        InvokeRepeating("SpawnUfo", 10f, 60f);
     }
 
     private void Update()
@@ -54,6 +57,8 @@ public class GameStateHandler : MonoBehaviour {
     void SpawnObstacle_Normal()
     {
         obGen.SpawnObstacle_Normal();
+        if (NormalObstacleSpawned != null)
+            NormalObstacleSpawned();
     }
 
     void SpawnObstacle_Killer()
@@ -64,6 +69,8 @@ public class GameStateHandler : MonoBehaviour {
     void SpawnUfo()
     {
         obGen.SpawnUfo();
+        if (UfoSpawned != null)
+            UfoSpawned();
     }
 
     void CalculateScore()

@@ -139,7 +139,7 @@ public class UfoManager : MonoBehaviour {
                 beamAnimator.Play("beamClose");
                 yield return new WaitForSeconds(0.420f);
                 ufoBeam.gameObject.SetActive(false);
-                transform.Translate(Vector3.right * Time.deltaTime * 3f);
+                transform.Translate(Vector3.right * Time.deltaTime * 5f);
                 
             }
         }
