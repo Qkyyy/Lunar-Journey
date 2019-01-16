@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class GameStateHandler : MonoBehaviour {
 
@@ -17,9 +18,11 @@ public class GameStateHandler : MonoBehaviour {
     Text scoreText;
 
     bool calculateScore = true;
+    bool isAdPlaying = false;
+    static bool playAd = true;
+
 
     float score = 0f;
-
 
     private void Awake()
     {
@@ -31,8 +34,11 @@ public class GameStateHandler : MonoBehaviour {
     private void Start()
     {
         InvokeRepeating("SpawnObstacle_Normal", 2.5f, 2.5f);
-        InvokeRepeating("SpawnObstacle_Killer", 10f, 10f);
-        InvokeRepeating("SpawnUfo", 10f, 60f);
+        InvokeRepeating("SpawnObstacle_Killer", 7f, 7f);
+        InvokeRepeating("SpawnUfo", 45f, 60f);
+        Debug.Log("changing " + playAd);
+        playAd = !playAd;
+        Debug.Log("to : " + playAd);
     }
 
     private void Update()
@@ -47,6 +53,8 @@ public class GameStateHandler : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         if (playerTransform.GetComponent<SpriteRenderer>().isVisible == false || playerTransform.GetComponent<SpriteRenderer>().material.color.a <= 0)
         {
+            if (playAd == true)
+                PlayAd();
             pauseInterface.SetActive(true);
             calculateScore = false;
             UpdateHighscore();
@@ -104,5 +112,16 @@ public class GameStateHandler : MonoBehaviour {
         else
             return false;
     }
+
+    void PlayAd()
+    {
+        if (Advertisement.IsReady() == true && isAdPlaying == false)
+        {
+            Advertisement.Show();
+            isAdPlaying = true;
+        }
+    }
+
+
 
 }

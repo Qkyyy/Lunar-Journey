@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour {
         rb.AddForce(dir.normalized * power,ForceMode2D.Impulse);
 
         //adds .y velocity so 'player' bounces up after click
-        rb.velocity = new Vector2(rb.velocity.x, 2.5f);
+        rb.velocity = new Vector2(rb.velocity.x, 3.2f);
 
         // adds a torque so ball doesn't seems so static
         rb.AddTorque(0.35f);

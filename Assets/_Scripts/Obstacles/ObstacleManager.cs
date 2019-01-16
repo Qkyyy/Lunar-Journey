@@ -29,7 +29,7 @@ public class ObstacleManager : MonoBehaviour {
         transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-5f,5f), -100) * Time.deltaTime * obstacleSpeed);
 
         //adds torque so meteor moves around randomly
-        transform.GetComponent<Rigidbody2D>().AddTorque(Random.Range(20f, 30f));
+        transform.GetComponent<Rigidbody2D>().AddTorque(Random.Range(100f, 30f));
 
 
         //ignores collision with borders, so obstacle can penetrate it
