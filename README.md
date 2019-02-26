@@ -1,2 +1,2 @@
-# unnamed-mobile-game
+# Lunar Journey
 2d mobile game
