@@ -13,6 +13,8 @@ public class LevelBuilder : MonoBehaviour {
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
+
         //camera's view left border x position
         cameraLeftBorder = Camera.main.ScreenToWorldPoint(new Vector3()).x;
         cameraTopBorder = Mathf.Abs(Camera.main.ScreenToWorldPoint(new Vector3()).y);
